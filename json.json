@@ -1,0 +1,8 @@
+{
+ "errorMessage": {
+  "code": "NotFound",
+  "description": "gif not found"
+ },
+ "reported": false,
+ "logged": false
+}
