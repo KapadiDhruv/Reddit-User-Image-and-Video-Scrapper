@@ -11,6 +11,8 @@ from colorama import Fore, Back, Style
 # os.remove("redgif.txt")
 # os.remove('onlygallery.txt')
 # os.remove('finalgallery.txt')
+f = open('gyfcat_test.json', 'r+')
+f.truncate(0)
 
 os.system('python temp_final.py')
 os.system('python onlyredgif.py')
@@ -22,6 +24,8 @@ os.system('python GalleryDownload.py')
 os.system('python gallery.py')
 os.system('python del_gallerylinks.py')
 os.system('python del_gycatlines.py')
+os.system('python del_gifv_txt.py')
+os.system('python transfer_data.py')
 
 print(Back.GREEN + 'HOGYA, TATA, BYEBYE')
 print(Style.RESET_ALL)

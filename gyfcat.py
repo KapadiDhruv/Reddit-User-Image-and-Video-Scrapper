@@ -23,7 +23,7 @@ with open('txtxt.txt') as input_data:
 
 
 lines_seen = set()  # holds lines already seen
-outfile = open('gyfcat.txt', "w")
+outfile = open('gyfcat.txt', "w+")
 infile = open('temp_gyfcat.txt', "r")
 print ("The file temp_gyfcat.txt is as follows")
 for line in infile:
@@ -43,7 +43,7 @@ for line in f:
             line = line.replace(word,'')
     lst.append(line)
 f.close()
-f = open('gyfcat.txt','w')
+f = open('gyfcat.txt','w+')
 for line in lst:
     f.write(line)
 f.close()
@@ -59,7 +59,7 @@ for line in file:
     # print(url + term)
     r = requests.get(url + term)
     print(r.json())
-    with open('gyfcat_json.json', 'w') as f:
+    with open('gyfcat_json.json', 'w+') as f:
         f.write(json.dumps(r.json(), indent = 1))
 
     json_file = open('gyfcat_json.json', 'r')
@@ -83,7 +83,7 @@ with open(r'test.json', 'r') as file:
     data = data.replace(search_text, replace_text)
     data = data.replace(search_text1, replace_text)
 
-with open(r'test.json', 'w') as file:
+with open(r'test.json', 'w+') as file:
     file.write(data)
     print("Text replaced")
         
@@ -99,7 +99,7 @@ with open(r'gyfcat_test.json', 'r') as file:
     data = data.replace(search_text, replace_text)
     data = data.replace(search_text1, replace_text)
 
-with open(r'gyfcat_test.json', 'w') as file:
+with open(r'gyfcat_test.json', 'w+') as file:
     file.write(data)
     print("Text replaced")
 
@@ -118,7 +118,7 @@ with open(r'gyfcat_test.json', 'r') as file:
     data = data.replace(search_text1, replace_text1)
     data = data.replace(search_text2, replace_text2)
 
-with open(r'gyfcat_test.json', 'w') as file:
+with open(r'gyfcat_test.json', 'w+') as file:
     file.write(data)
     print("Text replaced")
 
