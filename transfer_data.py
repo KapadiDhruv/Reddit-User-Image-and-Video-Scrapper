@@ -1,6 +1,12 @@
 import shutil
 import os
 
+# to create data folder if not existent
+folder_path = 'data'
+isExist = os.path.exists(folder_path) 
+
+if(isExist != True):
+    os.mkdir(folder_path)
 
 
 # deleting the below lines in txt file and transfering to data/pics.txt
@@ -30,10 +36,6 @@ answer1 = os.stat("test.json").st_size == 0
 
 if(answer1 != True):
     shutil.copyfile(original, target)
-
-
-#  For Gyfcat : 
-
 original = r'gyfcat_test.json'
 target = r'data/gyfcat.txt'
 
@@ -94,3 +96,6 @@ for file_name in file_names:
 f = open("gyfcat_test.json", "a")
 f.truncate()
 f.close()
+
+# to delte the data folder
+os.rmdir(folder_path)
