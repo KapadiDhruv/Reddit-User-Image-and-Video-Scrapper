@@ -36,6 +36,8 @@ answer1 = os.stat("test.json").st_size == 0
 
 if(answer1 != True):
     shutil.copyfile(original, target)
+
+# for gyfcat
 original = r'gyfcat_test.json'
 target = r'data/gyfcat.txt'
 
@@ -78,6 +80,7 @@ path = os.path.join( parent_dir, directory)
 # 'GeeksForGeeks' in
 # '/home / User / Documents'
 os.mkdir(path)
+os.mkdir(path + '\json_data')
 print("Directory '% s' created" % directory)
 
 
@@ -89,7 +92,7 @@ target_dir = path
 file_names = os.listdir(source_dir)
     
 for file_name in file_names:
-    shutil.move(os.path.join(source_dir, file_name), target_dir)
+    shutil.copy(os.path.join(source_dir, file_name), target_dir)
 
 
 # truncating the gyfcat_test.json file
@@ -98,4 +101,4 @@ f.truncate()
 f.close()
 
 # to delte the data folder
-os.rmdir(folder_path)
+# os.rmdir(folder_path)

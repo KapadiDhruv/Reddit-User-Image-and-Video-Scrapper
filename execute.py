@@ -1,7 +1,12 @@
 import os
 import py_compile
 import sys
+import shutil
 from colorama import Fore, Back, Style
+
+shutil.rmtree('temp_data')
+shutil.rmtree('data')
+
   
 # first delete the file if you are performing again in order to delete the redundant data in redgif.txt
 # os.remove("txt.txt")
@@ -26,6 +31,9 @@ os.system('python del_gallerylinks.py')
 os.system('python del_gycatlines.py')
 os.system('python del_gifv_txt.py')
 os.system('python transfer_data.py')
+os.system('python jsonmaker.py')
+os.system('python jstgallery.py')
+os.system('python cpy-temp_data.py')
 
 print(Back.GREEN + 'HOGYA, TATA, BYEBYE')
 print(Style.RESET_ALL)

@@ -10,4 +10,9 @@ ans. comment out C:\Users\DHRUV\AppData\Local\Programs\Python\Python310\lib\site
 
 
             still gyfcat are coming in redgif.txt and the gyfcat_texst,json are working fine
-            
+
+        --> IMPORTANT ***   : in the sub_list.csv file donot have another empty line it would not work for transfer data
+                            ERROR: path(D:/...................username/n)
+    
+
+just a remiender if : there is pics,gallerylinks and no vide in transfer data does it process gallerylinks???
