@@ -1,0 +1,53 @@
+import os
+import py_compile
+import sys
+import shutil
+from colorama import Fore, Back, Style
+
+
+# to take userInput for the /u/
+input_var = input("Enter Username: ")
+print ("you entered " + input_var) 
+
+with open('sub_list.csv','w+') as file:
+    file.write(input_var)
+# --------------------------------------------------
+
+
+shutil.rmtree('temp_data')
+shutil.rmtree('data')
+
+# to clear some file data......
+f = open('gyfcat_test.json', 'r+')
+f.truncate(0)
+f = open('gyfcat.txt', 'r+')
+f.truncate(0)
+f = open('temp_gyfcat.txt', 'r+')
+f.truncate(0)
+f = open('temp_redgif.txt', 'r+')
+f.truncate(0)
+
+
+os.system('python temp_final.py')
+os.system('python onlyredgif.py')
+os.system('python headers.py')
+os.system('python gyfcat.py')
+os.system('python del_redgif.py')
+os.system('python del_gifv_txt.py')
+os.system('python GalleryDownload.py')
+os.system('python gallery.py')
+os.system('python del_gallerylinks.py')
+os.system('python del_gycatlines.py')
+os.system('python del_gifv_txt.py')
+os.system('python transfer_data.py')
+os.system('python jsonmaker.py')
+os.system('python jstgallery.py')
+os.system('python cpy-temp_data.py')
+os.system('python beep.py')
+
+print(Back.GREEN + 'HOGYA, TATA, BYEBYE')
+print(Style.RESET_ALL)
+
+my_file = "test.json"
+base = os.path.splitext(my_file)[0]
+# os.rename(my_file, base + '.txt')

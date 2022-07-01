@@ -1,0 +1,18 @@
+i have solved the "praw 'Comment' object has no attribute 'url'
+ans. comment out C:\Users\DHRUV\AppData\Local\Programs\Python\Python310\lib\site-packages\praw\models\reddit\base.py   line 36 37 38
+
+
+30.04.2022 :there is maybe an update in PRAW : when executing term "None" appears in txtxt.txt file so to overcome
+                temp_final is made which delete the term None and all the things appears normal 
+
+            
+            find about v.reddit stuff links
+
+
+            still gyfcat are coming in redgif.txt and the gyfcat_texst,json are working fine
+
+        --> IMPORTANT ***   : in the sub_list.csv file donot have another empty line it would not work for transfer data
+                            ERROR: path(D:/...................username/n)
+    
+
+just a remiender if : there is pics,gallerylinks and no vide in transfer data does it process gallerylinks???
