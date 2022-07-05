@@ -57,48 +57,48 @@ answer3 = os.stat("Gallery_Links.txt").st_size == 0
 if(answer3 != True):
     shutil.copyfile(original, target)
 
+# ------------------------------------------------------------------------------------------------------
+
+# # To transfer files in the HDD 
+# # Directory
+
+# original = r'sub_list.csv'
 
 
-# To transfer files in the HDD 
-# Directory
-
-original = r'sub_list.csv'
-
-
-with open(original,'r') as firstfile: 
-    for line in firstfile:
-        directory = ('to do -' + line)
+# with open(original,'r') as firstfile: 
+#     for line in firstfile:
+#         directory = ('to do -' + line)
   
-# Parent Directory path
-parent_dir = "D:\Games\download\AA_here"
+# # Parent Directory path
+# parent_dir = "D:\Games\download\AA_here"
   
-# Path
+# # Path
 
-path = os.path.join( parent_dir, directory)
+# path = os.path.join( parent_dir, directory)
   
-# Create the directory
-# 'GeeksForGeeks' in
-# '/home / User / Documents'
-os.mkdir(path)
-os.mkdir(path + '\json_data')
-print("Directory '% s' created" % directory)
+# # Create the directory
+# # 'GeeksForGeeks' in
+# # '/home / User / Documents'
+# os.mkdir(path)
+# os.mkdir(path + '\json_data')
+# print("Directory '% s' created" % directory)
 
 
-# To move all the files from data to HDD
+# # To move all the files from data to HDD
 
-source_dir = 'C:\pyth\data'
-target_dir = path
+# source_dir = 'C:\pyth\data'
+# target_dir = path
     
-file_names = os.listdir(source_dir)
+# file_names = os.listdir(source_dir)
     
-for file_name in file_names:
-    shutil.copy(os.path.join(source_dir, file_name), target_dir)
+# for file_name in file_names:
+#     shutil.copy(os.path.join(source_dir, file_name), target_dir)
 
 
-# truncating the gyfcat_test.json file
-f = open("gyfcat_test.json", "a")
-f.truncate()
-f.close()
+# # truncating the gyfcat_test.json file
+# f = open("gyfcat_test.json", "a")
+# f.truncate()
+# f.close()
 
-# to delte the data folder
-# os.rmdir(folder_path)
+# # to delte the data folder
+# # os.rmdir(folder_path)

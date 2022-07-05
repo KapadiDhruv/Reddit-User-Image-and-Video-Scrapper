@@ -23,7 +23,7 @@ reddit = praw.Reddit(client_id='zWjxaNEf5mFbowd8YZ0ytA',
                      username='',
                      password='')
 
-POST_SEARCH_AMOUNT = 2000
+POST_SEARCH_AMOUNT = 2500
 
 
 
