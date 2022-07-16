@@ -112,19 +112,3 @@ file.close
 
 
 
-
-
-# --------------------------------------------------------------------
-
-# to del redgif from txtxt.txt
-
-# with open("txtxt.txt", "r+") as input:
-#     with open("temp_txt.txt", "w+") as output:
-#         # iterate all lines from file
-#         for line in input:
-#             # if text matches then don't write it
-#             if line.strip("\n") != "text to delete":
-#                 output.write(line)
-
-# # replace file with original name
-# os.replace('temp_txt.txt', 'txtxt.txt')

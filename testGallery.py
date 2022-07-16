@@ -1,6 +1,8 @@
 import os
 # https://github.com/mikf/gallery-dl
 
+# pip3 install gallery-dl
+
 from_file = 'onlygallery.txt'
 to_file = 'finalgallery.txt'
 
