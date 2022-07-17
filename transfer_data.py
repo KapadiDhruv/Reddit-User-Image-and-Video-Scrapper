@@ -10,7 +10,7 @@ if(isExist != True):
 
 
 # deleting the below lines in txt file and transfering to data/pics.txt
-bad_words = ['watch','/r/', 'gallery']
+bad_words = ['watch','/r/', 'gallery','.com/a/']
 
 with open('txt.txt','r') as oldfile, open('pics.txt', 'w+') as newfile:
     for line in oldfile:
@@ -53,6 +53,16 @@ original = r'Gallery_Links.txt'
 target = r'data/Gallery_Links.txt'
 
 answer3 = os.stat("Gallery_Links.txt").st_size == 0
+
+if(answer3 != True):
+    shutil.copyfile(original, target)
+
+#  For imgur_gallery : 
+
+original = r'imgur_album_links.txt'
+target = r'data/imgur_album.txt'
+
+answer3 = os.stat("imgur_album_links.txt").st_size == 0
 
 if(answer3 != True):
     shutil.copyfile(original, target)

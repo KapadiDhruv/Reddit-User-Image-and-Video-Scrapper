@@ -96,6 +96,17 @@ if(exists('data/Gallery_Links.csv')):
     with open('data/Gallery_Links.csv', 'w') as fout:
         fout.writelines(data[1:])
 else:
+    print('nothing to del...')   
+
+
+# imgur_album
+
+if(exists('data/imgur_album.csv')):
+    with open('data/imgur_album.csv', 'r') as fin:
+        data = fin.read().splitlines(True)
+    with open('data/imgur_album.csv', 'w') as fout:
+        fout.writelines(data[1:])
+else:
     print('nothing to del...')    
 
 
@@ -121,5 +132,4 @@ for filename in os.listdir(dest_path):
     oldbase = os.path.splitext(filename)
     newname = infilename.replace('.csv', '.txt')
     output = os.rename(infilename, newname)
-
-        
+    

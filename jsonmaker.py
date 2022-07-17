@@ -227,6 +227,29 @@ if(data_gallery == True):
     csv_to_json(csvFilePath, jsonFilePath)
 else:
     print('no  gallery file found')
+# *****************************************************************
+# for imgur_album
+data_imgur_album = exists('data/imgur_album.txt')
+if(data_imgur_album == True):
+
+    line = 'url'
+    with open('data/imgur_album.txt', 'r+') as file: 
+        file_data = file.read() 
+        file.seek(0, 0) 
+        file.write(line + '\n' + file_data) 
+
+
+    my_file = "data/imgur_album.txt"
+    base = os.path.splitext(my_file)[0]
+    os.rename(my_file, base + '.csv')
+
+# to convert the file from csv to json
+    csvFilePath = r'data/imgur_album.csv'
+    jsonFilePath = r'data/imgur_album.json'
+
+    csv_to_json(csvFilePath, jsonFilePath)
+else:
+    print('no imgur_album file found')
 
     
 

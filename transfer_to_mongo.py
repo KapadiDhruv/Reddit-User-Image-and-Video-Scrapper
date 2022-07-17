@@ -20,10 +20,11 @@ with open(original,'r') as firstfile:
         
         # Created or Switched to collection 
         # names: GeeksForGeeks
-        Collection1 = db[ line + "_pics"]
+        Collection1 = db[line + "_pics"]
         Collection2 = db[line + "_vid"]
         Collection3 = db[line + "_gyfcat"]
         Collection4 = db[line + "_Gallery_Links".lower()]
+        Collection5 = db[line + "_imgur_album".lower()]
 
 
         if(exists('pics.json')):
@@ -104,6 +105,27 @@ with open(original,'r') as firstfile:
                 Collection4.insert_one(file_data)
         else:
            print(Back.RED + 'No Gallery_Links.json file found to upload on Database')
+           print(Style.RESET_ALL)
+
+
+
+        # imgur_album
+        if(exists('imgur_album.json')):
+            # Loading or Opening the json file
+            with open('imgur_album.json') as file:
+                file_data = json.load(file)
+                
+            # Inserting the loaded data in the Collection
+            # if JSON contains data more than one entry
+            # insert_many is used else inser_one is used
+            if isinstance(file_data, list):
+                Collection5.insert_many(file_data) 
+                print(Back.GREEN +'imgur_album.json uploaded in mysql Database')
+                print(Style.RESET_ALL) 
+            else:
+                Collection5.insert_one(file_data)
+        else:
+           print(Back.RED + 'No imgur_album.json file found to upload on Database')
            print(Style.RESET_ALL)
 
 

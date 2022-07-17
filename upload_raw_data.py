@@ -148,6 +148,6 @@ with open(original,'r') as firstfile:
         print(Style.RESET_ALL)
 
 # -----------------------------------------------------------------------------------------------------------------
-
+print('')
 #  delete the txtxt.json file
 os.remove('txtxt.json')

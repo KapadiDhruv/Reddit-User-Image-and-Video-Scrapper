@@ -81,3 +81,20 @@ with open(original,'r') as firstfile:
         else:
             print(Back.RED + 'No gyfcat_test.json file found to upload on Database')
             print(Style.RESET_ALL)
+
+# ----------------------------------------------------------------------------------------------------
+        #  Imgur album
+        if(exists(os.path.join(os.getcwd() + '/to do - ' + user_name + '/imgur_album.json'))):
+            engine = create_engine('mysql+pymysql://root:dhruv@localhost/reddit')
+            imgur_album = os.path.join(os.getcwd() + '/to do - ' + user_name + '/imgur_album.json')
+            df = pd.read_json(imgur_album)
+            table_name = (user_name + '_imgur_album').lower()
+            # database name always save in db in small letters
+            df.to_sql(table_name,con=engine,if_exists='replace')
+
+            print(Back.GREEN +'imgur_album.json uploaded in mysql Database')
+            print(Style.RESET_ALL)
+
+        else:
+            print(Back.RED + 'No gyfcat_test.json file found to upload on Database')
+            print(Style.RESET_ALL)

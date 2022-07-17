@@ -5,10 +5,15 @@ f_final = open("sub_list.csv", "r")
 for line in f_final:
     user_name = line.strip()
     pics_qry =  f"""CREATE TABLE `reddit`.`{user_name + '_pics'}` (`id` INT NOT NULL AUTO_INCREMENT,`url` VARCHAR(45) NULL,PRIMARY KEY (`id`));"""
-    vid_qry =  f"""CREATE TABLE `reddit`.`{user_name + '_vid'}` (`id` INT NOT NULL AUTO_INCREMENT,`url` VARCHAR(45) NULL,PRIMARY KEY (`id`));"""
-    Gallery_Links_qry =  f"""CREATE TABLE `reddit`.`{user_name + '_Gallery_Links'}` (`id` INT NOT NULL AUTO_INCREMENT,`url` VARCHAR(45) NULL,PRIMARY KEY (`id`));"""
-    Gyfcat_qry =  f"""CREATE TABLE `reddit`.`{user_name +'_Gyfcat'}` (`id` INT NOT NULL AUTO_INCREMENT,`url` VARCHAR(45) NULL,PRIMARY KEY (`id`));"""
     print(pics_qry)       
+    vid_qry =  f"""CREATE TABLE `reddit`.`{user_name + '_vid'}` (`id` INT NOT NULL AUTO_INCREMENT,`url` VARCHAR(45) NULL,PRIMARY KEY (`id`));"""
+    print(vid_qry)       
+    Gallery_Links_qry =  f"""CREATE TABLE `reddit`.`{user_name + '_Gallery_Links'}` (`id` INT NOT NULL AUTO_INCREMENT,`url` VARCHAR(45) NULL,PRIMARY KEY (`id`));"""
+    print(Gallery_Links_qry)       
+    Gyfcat_qry =  f"""CREATE TABLE `reddit`.`{user_name +'_Gyfcat'}` (`id` INT NOT NULL AUTO_INCREMENT,`url` VARCHAR(45) NULL,PRIMARY KEY (`id`));"""
+    print(Gyfcat_qry)       
+    imgur_qry =  f"""CREATE TABLE `reddit`.`{user_name +'_imgur_album'}` (`id` INT NOT NULL AUTO_INCREMENT,`url` VARCHAR(45) NULL,PRIMARY KEY (`id`));"""
+    print(imgur_qry)       
 
     # connecting to the database
     dataBase = mysql.connector.connect(
@@ -25,6 +30,7 @@ for line in f_final:
     user_name_vid           = vid_qry
     user_name_Gallery_Links = Gallery_Links_qry
     user_name_Gyfcat        = Gyfcat_qry
+    user_name_imgur         = imgur_qry
 
     
     # table created
@@ -32,6 +38,7 @@ for line in f_final:
     cursorObject.execute(user_name_vid) 
     cursorObject.execute(user_name_Gallery_Links) 
     cursorObject.execute(user_name_Gyfcat) 
+    cursorObject.execute(user_name_imgur) 
     
     # disconnecting from server
     dataBase.close()
