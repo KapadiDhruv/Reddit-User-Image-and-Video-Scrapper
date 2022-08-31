@@ -29,12 +29,14 @@ sql2 = "DROP TABLE " + str(user_name)  + "_pics"
 sql3 = "DROP TABLE " + str(user_name)  + "_vid"
 sql4 = "DROP TABLE " + str(user_name)  + "_gallery_links"
 sql5 = "DROP TABLE " + str(user_name)  + "_gyfcat"
+sql6 = "DROP TABLE " + str(user_name)  + "_imgur_album"
 
 mycursor.execute(sql1)
 mycursor.execute(sql2)
 mycursor.execute(sql3)
 mycursor.execute(sql4)
 mycursor.execute(sql5)
+mycursor.execute(sql6)
 
 Collection1.drop()
 Collection2.drop()
