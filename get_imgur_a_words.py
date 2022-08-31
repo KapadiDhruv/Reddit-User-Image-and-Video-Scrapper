@@ -44,4 +44,34 @@ for line in lst:
 
 f.close()
 
+f = open('only_imgur_album.txt','r')
+a = ['https://m.imgur.com/a/']
+lst = []
+for line in f:
+    for word in a:
+        if word in line:
+            line = line.replace(word,'')
+    lst.append(line)
+f.close()
+f = open('only_imgur_album.txt','w')
+for line in lst:
+    f.write(line)
+    print(line)
+f.close()
+
+f = open('only_imgur_album.txt','r')
+a = ['http://m.imgur.com/a/']
+lst = []
+for line in f:
+    for word in a:
+        if word in line:
+            line = line.replace(word,'')
+    lst.append(line)
+f.close()
+f = open('only_imgur_album.txt','w')
+for line in lst:
+    f.write(line)
+    print(line)
+
+f.close()
 
