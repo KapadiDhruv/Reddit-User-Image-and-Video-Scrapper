@@ -4,7 +4,7 @@ from pymongo import MongoClient
 
 print('hold on deleting the tables!')
 
-user_name = "natural_red"
+user_name = "sevin7676"
 
 mydb = mysql.connector.connect(
   host="localhost",
