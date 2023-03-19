@@ -1,0 +1,10 @@
+praw
+wget
+RedDownloader
+pandas
+imgurpython
+opencv-python
+splitter
+gallery-dl 
+re
+requests
