@@ -38,9 +38,10 @@ for line in f_final:
 print(f"Starting {sub}!")
 
 for submission in subreddit.top(limit=POST_SEARCH_AMOUNT):
-    url = str(submission.url)
-    print(url)
-    file.write(url + '\n')
+    if hasattr(submission, 'url'):
+        url = str(submission.url)
+        print(url)
+        file.write(url + '\n')
     
     # -----------------------------------------------------------------------------
 
