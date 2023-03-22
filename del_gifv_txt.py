@@ -1,28 +1,15 @@
 import os
-import re
 
-search_text = ".gifv"
-replace_text = ".mp4"
+search_replace_list = [
+    (".gifv", ".mp4"),
+    (".gif", ".mp4")
+]
 
-search_text1 = ".gif"
-replace_text1 = ".mp4"
-
-with open(r'txt.txt', 'r') as file:
-    data = file.read()
-    data = data.replace(search_text, replace_text)
-
-with open(r'txt.txt', 'w') as file:
-    file.write(data)
-    print("Text replaced")
-
-
-
-# with open(r'txtxt.txt', 'r') as file:
-#     data = file.read()
-#     data = data.replace(search_text1, replace_text1)
-
-# with open(r'txtxt.txt', 'w') as file:
-#     file.write(data)
-#     print("Text replaced")
-
-
+for filename in ['txt.txt', 'txtxt.txt']:
+    with open(filename, 'r') as file:
+        data = file.read()
+        for search_text, replace_text in search_replace_list:
+            data = data.replace(search_text, replace_text)
+    with open(filename, 'w') as file:
+        file.write(data)
+    print(f"Text replaced in {filename}")

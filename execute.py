@@ -13,10 +13,12 @@ with open('sub_list.csv','w+') as file:
     file.write(input_var)
 # --------------------------------------------------
 
-
-shutil.rmtree('temp_data')
-shutil.rmtree('data')
-
+if os.path.exists('temp_data'):
+    shutil.rmtree('temp_data')
+if os.path.exists('data'):
+    shutil.rmtree('data')
+    
+os.system('python makedir.py')
 # to clear some file data......
 f = open('gyfcat_test.json', 'r+')
 f.truncate(0)
@@ -41,13 +43,13 @@ os.system('python gallery.py')
 os.system('python del_gallerylinks.py')
 os.system('python del_gycatlines.py')
 os.system('python del_gifv_txt.py')
-os.system('python upload_raw_data.py')
-os.system('python transfer_data.py')
-os.system('python jsonmaker.py')
-os.system('python cpy-temp_data.py')
-os.system('python transfer_to_mongo.py')
-os.system('python create_mysql_table.py')
-os.system('python push_data_mysql.py')
+# os.system('python upload_raw_data.py')
+# os.system('python transfer_data.py')
+# os.system('python jsonmaker.py')
+# os.system('python cpy-temp_data.py')
+# os.system('python transfer_to_mongo.py')
+# os.system('python create_mysql_table.py')
+# os.system('python push_data_mysql.py')
 os.system('python beep.py')
 
 print(Back.GREEN + 'HOGYA, TATA, BYEBYE')

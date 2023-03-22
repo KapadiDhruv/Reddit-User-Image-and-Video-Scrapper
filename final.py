@@ -1,21 +1,10 @@
-
-from multiprocessing.reduction import duplicate
-from pprint import pprint
 import praw
-import urllib
 import cv2
-from collections import Counter
-import re
-import linecache
 import hashlib
-import os
-import splitter
 
-# clears file test.json for rerun------------------------------
-ffile = open('test.json','r+')
-ffile.truncate()
-ffile.close()
-# -------------------------------------------------------------
+# clears file test.json for rerun
+with open('test.json', 'w'):
+    pass
 
 reddit = praw.Reddit(client_id='zWjxaNEf5mFbowd8YZ0ytA',
                      client_secret='4-crbYnGfzYMG8n4ReyvSr_P07dXxA',
@@ -25,43 +14,36 @@ reddit = praw.Reddit(client_id='zWjxaNEf5mFbowd8YZ0ytA',
 
 POST_SEARCH_AMOUNT = 2500
 
-
-
-file = open("txtxt.txt", "w")
-
 f_final = open("sub_list.csv", "r")
-img_notfound = cv2.imread('imageNF.png')
+
 for line in f_final:
     sub = line.strip()
     subreddit = reddit.redditor(sub)
 
-print(f"Starting {sub}!")
+    print(f"Starting {sub}!")
 
-for submission in subreddit.top(limit=POST_SEARCH_AMOUNT):
-    if hasattr(submission, 'url'):
-        url = str(submission.url)
-        print(url)
-        file.write(url + '\n')
-    
-    # -----------------------------------------------------------------------------
+    with open("txtxt.txt", "w") as file:
+        for submission in subreddit.top(limit=POST_SEARCH_AMOUNT):
+            if hasattr(submission, 'url'):
+                url = str(submission.url)
+                print(url)
+                file.write(url + '\n')
 
+# Eliminate duplicates and write to output file
+completed_lines_hash = set()
 output_file_path = "editedtxt.txt"
 input_file_path = "txtxt.txt"
 
-completed_lines_hash = set()
+with open(output_file_path, "w") as output_file:
+    with open(input_file_path, "r") as input_file:
+        for line in input_file:
+            hashValue = hashlib.md5(line.rstrip().encode('utf-8')).hexdigest()
 
-output_file = open(output_file_path, "w")
-for line in open(input_file_path, "r"):
-    hashValue = hashlib.md5(line.rstrip().encode('utf-8')).hexdigest()
+            if hashValue not in completed_lines_hash:
+                output_file.write(line)
+                completed_lines_hash.add(hashValue)
 
-    if hashValue not in completed_lines_hash:
-        output_file.write(line)
-        completed_lines_hash.add(hashValue)
-
-output_file.close()
-
-
-# to replace the extionsion
+# Replace extension
 search_text = ".gifv"
 replace_text = ".mp4"
 
@@ -72,44 +54,12 @@ with open(r'txtxt.txt', 'r') as file:
 with open(r'txtxt.txt', 'w') as file:
     file.write(data)
     print("Text replaced")
-# completed replacing extionsions
-# --------------------------------------------------------------
 
-# # to cut paste the redgif file
-
-print("*******")
-
-# redgif = "redgif"
-with open('txtxt.txt') as input_data:
-    for line in input_data:
-        if "redgif" in line:
+# Extract redgif URLs
+with open('txtxt.txt', 'r') as input_file, open('redgif.txt', "w") as output_file:
+    lines_seen = set()  # holds lines already seen
+    for line in input_file:
+        if "redgif" in line and line not in lines_seen:
             print(line)
-            f = open(r"temp_redgif.txt", "a")
-            f.write(line)
-            f.close()
-
-
-lines_seen = set()  # holds lines already seen
-outfile = open('redgif.txt', "w")
-infile = open('temp_redgif.txt', "r")
-print ("The file temp_redgif.txt is as follows")
-for line in infile:
-    print (line)
-    if line not in lines_seen:  # not a duplicate
-        outfile.write(line)
-        lines_seen.add(line)
-outfile.close()
-
-
-
-
-
-
-# file.close
-
-
-file.flush()
-file.close
-
-
-
+            output_file.write(line)
+            lines_seen.add(line)

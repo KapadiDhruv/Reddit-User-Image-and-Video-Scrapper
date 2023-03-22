@@ -1,21 +1,7 @@
-import os
 import re
 
-
-file1 = open('txtxt.txt','r')
-file2 = open('txt.txt','w')
-for line in file1.readlines():
-  
-    x = re.findall("^https://redgifs" , line)
-    if not x:
-        
-        print(line)
-        file2.write(line)
-    
-
-file1.close()
-file2.close()
-
-
-
-    
+with open('txtxt.txt', 'r') as file1, open('txt.txt', 'w') as file2:
+    for line in file1:
+        if not re.match(r'^https?://(v3\.)?(www\.)?redgifs\.com/watch/', line):
+            print(line)
+            file2.write(line)

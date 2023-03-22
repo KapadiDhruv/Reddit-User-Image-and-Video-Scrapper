@@ -1,77 +1,20 @@
+with open('txtxt.txt', 'r') as unedited_redgif, open('only_imgur_album.txt','w+') as edited_redgif:
+    for line in unedited_redgif:
+        if "imgur.com/a/" in line:
+            print(line)
+            edited_redgif.write(line)
 
-unedited_redgif = open('txtxt.txt', 'r')
-edited_redgif = open('only_imgur_album.txt','w+')
+words_to_replace = ['http://imgur.com/a/', 'https://imgur.com/a/', 'https://m.imgur.com/a/', 'http://m.imgur.com/a/']
 
-for line in unedited_redgif:
-    if "imgur.com/a/" in line:
+with open('only_imgur_album.txt','r') as f:
+    lst = []
+    for line in f:
+        for word in words_to_replace:
+            if word in line:
+                line = line.replace(word,'')
+        lst.append(line)
+
+with open('only_imgur_album.txt','w') as f:
+    for line in lst:
+        f.write(line)
         print(line)
-        edited_redgif.write(line)
-
-
-unedited_redgif.close()
-edited_redgif.close()
-# -------------------------------------------------------------
-#  to delete some words 
-
-f = open('only_imgur_album.txt','r')
-a = ['http://imgur.com/a/']
-lst = []
-for line in f:
-    for word in a:
-        if word in line:
-            line = line.replace(word,'')
-    lst.append(line)
-f.close()
-f = open('only_imgur_album.txt','w')
-for line in lst:
-    f.write(line)
-    print(line)
-f.close()
-
-f = open('only_imgur_album.txt','r')
-a = ['https://imgur.com/a/']
-lst = []
-for line in f:
-    for word in a:
-        if word in line:
-            line = line.replace(word,'')
-    lst.append(line)
-f.close()
-f = open('only_imgur_album.txt','w')
-for line in lst:
-    f.write(line)
-    print(line)
-
-f.close()
-
-f = open('only_imgur_album.txt','r')
-a = ['https://m.imgur.com/a/']
-lst = []
-for line in f:
-    for word in a:
-        if word in line:
-            line = line.replace(word,'')
-    lst.append(line)
-f.close()
-f = open('only_imgur_album.txt','w')
-for line in lst:
-    f.write(line)
-    print(line)
-f.close()
-
-f = open('only_imgur_album.txt','r')
-a = ['http://m.imgur.com/a/']
-lst = []
-for line in f:
-    for word in a:
-        if word in line:
-            line = line.replace(word,'')
-    lst.append(line)
-f.close()
-f = open('only_imgur_album.txt','w')
-for line in lst:
-    f.write(line)
-    print(line)
-
-f.close()
-

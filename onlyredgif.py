@@ -1,80 +1,21 @@
+with open('txtxt.txt', 'r') as unedited_redgif:
+    with open('redgif.txt','w') as edited_redgif:
+        for line in unedited_redgif:
+            if "redgif" in line:
+                edited_redgif.write(line)
 
+with open('redgif.txt', 'r') as f:
+    lst = []
+    for line in f:
+        line = line.replace('https://redgifs.com/watch/', '')
+        line = line.replace('https://www.redgifs.com/watch/', '')
+        line = line.replace('http://redgifs.com/watch/', '')
+        line = line.replace('http://www.redgifs.com/watch/', '')
+        line = line.replace('https://v3.redgifs.com/watch/', '')
+        line = line.replace('http://v3.redgifs.com/watch/', '')
+        lst.append(line)
 
-
-unedited_redgif = open('txtxt.txt', 'r')
-edited_redgif = open('redgif.txt','w')
-
-for line in unedited_redgif:
-    if "redgif" in line:
+with open('redgif.txt', 'w') as f:
+    for line in lst:
+        f.write(line)
         print(line)
-        edited_redgif.write(line)
-
-
-unedited_redgif.close()
-edited_redgif.close()
-# -------------------------------------------------------------
-#  to delete some words 
-
-f = open('redgif.txt','r')
-a = ['https://redgifs.com/watch/']
-lst = []
-for line in f:
-    for word in a:
-        if word in line:
-            line = line.replace(word,'')
-    lst.append(line)
-f.close()
-f = open('redgif.txt','w')
-for line in lst:
-    f.write(line)
-    print(line)
-f.close()
-
-f = open('redgif.txt','r')
-a = ['https://www.redgifs.com/watch/']
-lst = []
-for line in f:
-    for word in a:
-        if word in line:
-            line = line.replace(word,'')
-    lst.append(line)
-f.close()
-f = open('redgif.txt','w')
-for line in lst:
-    f.write(line)
-f.close()
-
-# -------------------------------------------------------------
-#  to delete some words 
-
-f = open('redgif.txt','r')
-a = ['http://redgifs.com/watch/']
-lst = []
-for line in f:
-    for word in a:
-        if word in line:
-            line = line.replace(word,'')
-    lst.append(line)
-f.close()
-f = open('redgif.txt','w')
-for line in lst:
-    f.write(line)
-f.close()
-
-
-
-f = open('redgif.txt','r')
-a = ['http://www.redgifs.com/watch/']
-lst = []
-for line in f:
-    for word in a:
-        if word in line:
-            line = line.replace(word,'')
-    lst.append(line)
-f.close()
-f = open('redgif.txt','w')
-for line in lst:
-    f.write(line)
-f.close()
-
-

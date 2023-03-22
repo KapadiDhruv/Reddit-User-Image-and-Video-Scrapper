@@ -1,80 +1,17 @@
-# from asyncore import write
-# from textwrap import indent
-# import requests
-# import json
-# import os
-# import pandas as pd
-# import requests
-# import sys
-# import string
-
-# file = open('redgif.txt',"r+")
-# for line in file:
-#     sub = line.strip()
-#     # print(sub)
-#     url = "https://api.redgifs.com/v2/gifs/"
-#     term = sub
-#     # print(url + term)
-#     r = requests.get(url + term)
-#     print(r.json())
-    # with open('json.json', 'w') as f:
-    #     f.write(json.dumps(r.json(), indent = 1))
-
-#     json_file = open('json.json', 'r')
-#     edited_file = open('test.json','a')
-
-#     for line in json_file:
-#         if "hd" in line:
-#             print(line)
-#             edited_file.write(line)
-
-#     json_file.close()
-#     edited_file.close()
-# print("-----------------------------------------------")
-
-# search_text = '"hd": "'
-# search_text1 = '",'
-# replace_text = " "
-
-# with open(r'test.json', 'r') as file:
-#     data = file.read()
-#     data = data.replace(search_text, replace_text)
-#     data = data.replace(search_text1, replace_text)
-
-# with open(r'test.json', 'w') as file:
-#     file.write(data)
-#     print("Text replaced")
-        
-    
-
-# # word_1 = '"hd": "'
-# # word_2 = '",'
-# # f_file = "test.json"
-# # delete_list = [word_1,word_2]
-# # with open(f_file,"r+") as fin, open(f_file, "w+") as fout:
-# #     for line in fin:
-# #         for word in delete_list:
-# #             line = line.replace(word, "")
-# #         fout.write(line)
-        
-# # f_file.close()
-
-
-# ````````````````````````````````````````````````````````````````````````````````
 import sys, json, os
 import traceback
 import requests, time, shutil
 import wget
+import hashlib
+
+
+  
+# importing time module
+import time
 
 
 def url_file(redgifs_url, filename):
-    """
-    It takes a RedGifs URL and a filename, and downloads the video to the filename
-    
-    :param redgifs_url: The URL of the RedGifs video you want to download
-    :param filename: The name of the file to save the video as
-    :return: The URL of the HD video.
-    """
+
     sys.stdout.reconfigure(encoding='utf-8')
     API_URL_REDGIFS = 'https://api.redgifs.com/v1/gifs/'
     try:
@@ -94,58 +31,87 @@ def url_file(redgifs_url, filename):
             return
         else:
             rawData = request.json()
-            url = 'http://localhost:3000'
-            myobj = {'data': rawData}
+            video_url = ''
+            if 'gif' in rawData and 'urls' in rawData['gif'] and 'hd' in rawData['gif']['urls']:
+                video_url = rawData['gif']['urls']['hd']
+                with sess.get(video_url, stream=True) as r:
+                    with open(filename, 'wb') as f:
+                        shutil.copyfileobj(r.raw, f)
+                    video_hash = hashlib.sha256(open(filename, 'rb').read()).hexdigest()
+                    return {'filename': filename, 'sha256': video_hash}
 
-            x = requests.post(url, json = myobj)
-
-            # print(x.json())
-            with sess.get(x.json(), stream=True) as r:
-                open(filename, 'wb').write(r.content)
-
-            #     #Get HD video url
-            # if rawData['gif']: 
-            #     hd_video_url = rawData['gif']['urls']['hd']
-            #     print("URL = {}".format(hd_video_url))
-            #     # still to make the file of vid.json
-            #     # with open('test.json', 'w') as f:
-            #     #     f.write(hd_video_url)                    
-
-                
-            #     with sess.get(hd_video_url, stream=True) as r:
-            #         with open(filename, 'wb') as f:
-            #             for chunk in r.iter_content(chunk_size=8192): 
-            #                 f.write(chunk)
-
-            #     return hd_video_url
-            
-            # else:
-            #     hd_video_url = rawData['gfyItem']['content_urls']['mp4']['url']
-            #     print("URL = {}".format(hd_video_url))
-            #     # still to make the file of vid.json
-            #     with open('test.json', 'w') as f:
-            #         f.write(hd_video_url)                    
-
-                
-            #     with sess.get(hd_video_url, stream=True) as r:
-            #         with open(filename, 'wb') as f:
-            #             for chunk in r.iter_content(chunk_size=8192): 
-            #                 f.write(chunk)
-
-            #     return hd_video_url
-
+            elif 'gfyItem' in rawData and 'content_urls' in rawData['gfyItem'] and 'mp4' in rawData['gfyItem']['content_urls']:
+                video_url = rawData['gfyItem']['content_urls']['mp4']['url']
+                with sess.get(video_url, stream=True) as r:
+                    with open(filename, 'wb') as f:
+                        shutil.copyfileobj(r.raw, f)
+                    video_hash = hashlib.sha256(open(filename, 'rb').read()).hexdigest()
+                    return {'filename': filename, 'sha256': video_hash}
+            else : 
+                print("redgifs_url not present!")
 
     except Exception:
         # traceback.print_exc()
         return
 
+
 file = open('redgif.txt',"r+")
-os.mkdir("vid")
-os.chdir(os.path.join(os.getcwd() + "\\vid"))
+
+f_final = open("sub_list.csv", "r")
+
+for line in f_final:
+    user = line.strip()
+
+folder_name = user + '_vid'
+if os.path.exists(folder_name):
+    shutil.rmtree(folder_name)
+os.mkdir(folder_name)
+
+os.chdir(os.path.join(os.getcwd(), folder_name))
+video_info = {}
 for line in file:
     sub = line.strip()
     print(sub)
-    url_file(f"https://www.redgifs.com/watch/{sub}", f"{sub}.mp4")
- 
+    video_data = url_file(f"https://www.redgifs.com/watch/{sub}", f"{sub}.mp4")
+    if video_data:
+        video_info[sub] = video_data
+
+with open('video_info.json', 'w') as f:
+    json.dump(video_info, f)
+
+folder_path = os.getcwd()
+
+for filename in os.listdir(folder_path):
+    filepath = os.path.join(folder_path, filename)
+    if os.path.isfile(filepath) and os.path.getsize(filepath) == 0:
+        print(f"File with size 0 found: {filename}")
+        video_data = url_file(f"https://www.redgifs.com/watch/{filename[:-4]}", filepath)
+        if video_data:
+            with open('video_info.json', 'r') as f:
+                video_info = json.load(f)
+            video_info[filename[:-4]] = video_data
+            with open('video_info.json', 'w') as f:
+                json.dump(video_info, f)
 
 
+# check the hash key and delete duplicate
+
+with open('video_info.json', 'r') as f:
+    video_info = json.load(f)
+
+seen_hashes = set()
+for sub, data in video_info.items():
+    sha = data['sha256']
+    if sha in seen_hashes:
+        os.remove(data['filename'])
+        print(f"Deleted file with duplicate SHA-256 hash: {data['filename']}")
+    else:
+        seen_hashes.add(sha)
+
+# Update the video_info.json file to remove entries for deleted files
+for sub, data in list(video_info.items()):
+    if not os.path.exists(data['filename']):
+        del video_info[sub]
+
+with open('video_info.json', 'w') as f:
+    json.dump(video_info, f)
