@@ -1,12 +1,17 @@
-# delete galelery links from txt.txt file 
+import os
 
-with open("Gallery_Links.txt",'r') as file:
-    lines = file.readlines()
+with open("sub_list.csv", "r") as f_subreddits:
+    for sub in f_subreddits:
+        sub = sub.strip()
+        username = sub
 
-with open("Gallery_Links.txt",'w') as file:
-    for line in lines:
-        # find() returns -1 if no match is found
-        if line.find("gallery") != -1:
-            pass
-        else:
-            file.write(line)
+        # Open cleaned file and remove lines containing "gallery"
+        with open(f"{username}/cleaned_{username}.txt", "r+") as file:
+            lines = file.readlines()
+            file.seek(0)
+            for line in lines:
+                # Check if line contains "gallery"
+                if "gallery" not in line:
+                    # If not, write line to file
+                    file.write(line)
+            file.truncate()

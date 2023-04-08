@@ -55,19 +55,21 @@ def url_file(redgifs_url, filename):
         return
 
 
-file = open('redgif.txt',"r+")
 
 f_final = open("sub_list.csv", "r")
 
 for line in f_final:
     user = line.strip()
 
-folder_name = user + '_vid'
+file = open(f'{user}//onlyredgif_{user}.txt',"r+")
+
+# folder_name = user + '_vid'
+folder_name = f'{user}\\videos_{user}'
 if os.path.exists(folder_name):
     shutil.rmtree(folder_name)
 os.mkdir(folder_name)
 
-os.chdir(os.path.join(os.getcwd(), folder_name))
+os.chdir(os.path.join(os.getcwd(), f'{folder_name}'))
 video_info = {}
 for line in file:
     sub = line.strip()
@@ -114,4 +116,4 @@ for sub, data in list(video_info.items()):
         del video_info[sub]
 
 with open('video_info.json', 'w') as f:
-    json.dump(video_info, f)
+    json.dump(video_info, f,indent=4)

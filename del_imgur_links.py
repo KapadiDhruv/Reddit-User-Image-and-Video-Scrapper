@@ -9,6 +9,6 @@ with open("sub_list.csv", "r") as f_subreddits:
         lines = file.readlines()
         file.seek(0)
         for line in lines:
-            if not re.match("^https://gfycat.com", line):
+            if not re.match("^http://imgur.com/a/", line):
                 file.write(line)
         file.truncate()

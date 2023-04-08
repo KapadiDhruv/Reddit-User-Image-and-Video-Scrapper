@@ -8,3 +8,4 @@ splitter
 gallery-dl 
 re
 requests
+prettytable 
