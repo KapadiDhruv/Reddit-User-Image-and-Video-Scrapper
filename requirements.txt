@@ -6,6 +6,6 @@ imgurpython
 opencv-python
 splitter
 gallery-dl 
-re
 requests
 prettytable 
+Pillow
