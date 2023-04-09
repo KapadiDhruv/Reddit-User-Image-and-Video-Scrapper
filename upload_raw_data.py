@@ -25,12 +25,12 @@ def csv_to_json(csvFilePath, jsonFilePath):
         #load csv file data using csv library's dictionary reader
         csvReader = csv.DictReader(csvf) 
 
-        #convert each csv row into python dict
+        #convert each csv row into python3 dict
         for row in csvReader: 
-            #add this python dict to json array
+            #add this python3 dict to json array
             jsonArray.append(row)
   
-    #convert python jsonArray to JSON String and write to file
+    #convert python3 jsonArray to JSON String and write to file
     with open(jsonFilePath, 'w', encoding='utf-8') as jsonf: 
         jsonString = json.dumps(jsonArray, indent=4)
         jsonf.write(jsonString)

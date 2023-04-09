@@ -10,7 +10,7 @@ from PIL import Image, ImageDraw, ImageFont
 start_time = time.time()
 
 # Define font to use for the images
-font = ImageFont.truetype("arial.ttf", size=12)
+# font = ImageFont.truetype("arial.ttf", size=12)
 
 with open("sub_list.csv", "r") as f_subreddits:
     for sub in f_subreddits:
@@ -69,17 +69,17 @@ with open("sub_list.csv", "r") as f_subreddits:
     # Create images of tables and save them in the directory where images are downloaded
     img1 = Image.new('RGB', (1200, 500), color=(255, 255, 255))
     d = ImageDraw.Draw(img1)
-    d.text((10, 10), download_stats_table.get_string(), font=font, fill=(0, 0, 0))
+    d.text((10, 10), download_stats_table.get_string(), fill=(0, 0, 0))
     img1.save(f"{pics_directory}/downloads_table.png")
 
     img2 = Image.new('RGB', (500, 100), color = (255, 255, 255))
     d = ImageDraw.Draw(img2)
-    d.text((10, 10), duplicate_stats_table.get_string(), font=font, fill=(0, 0, 0))
+    d.text((10, 10), duplicate_stats_table.get_string(), fill=(0, 0, 0))
     img2.save(f"{pics_directory}/duplicates_table.png")
 
     img3 = Image.new('RGB', (500, 100), color = (255, 255, 255))
     d = ImageDraw.Draw(img3)
-    d.text((10, 10), time_stats_table.get_string(), font=font, fill=(0, 0, 0))
+    d.text((10, 10), time_stats_table.get_string(), fill=(0, 0, 0))
     img3.save(f"{pics_directory}/time_stats_table.png")
 
     print(f"Downloaded {index-1} files with {duplicates} duplicates detected in {total_download_time_str}")

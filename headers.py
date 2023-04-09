@@ -61,10 +61,10 @@ f_final = open("sub_list.csv", "r")
 for line in f_final:
     user = line.strip()
 
-file = open(f'{user}//onlyredgif_{user}.txt',"r+")
+file = open(f'{user}/onlyredgif_{user}.txt',"r+")
 
 # folder_name = user + '_vid'
-folder_name = f'{user}\\videos_{user}'
+folder_name = f'{user}/videos_{user}'
 if os.path.exists(folder_name):
     shutil.rmtree(folder_name)
 os.mkdir(folder_name)

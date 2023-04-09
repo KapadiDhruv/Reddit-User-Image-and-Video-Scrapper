@@ -75,7 +75,7 @@ reddit = praw.Reddit(client_id='zWjxaNEf5mFbowd8YZ0ytA',
                      username='',
                      password='')
 
-POST_SEARCH_AMOUNT = 25000
+POST_SEARCH_AMOUNT = 30000
 
 # read the subreddits from sub_list.csv
 with open("sub_list.csv", "r") as f_subreddits:

@@ -3,7 +3,7 @@ wget
 RedDownloader
 pandas
 imgurpython
-opencv-python
+opencv-python3
 splitter
 gallery-dl 
 requests
