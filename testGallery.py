@@ -25,3 +25,11 @@ with open("sub_list.csv", "r") as f_subreddits:
     # write gallery list to finalgallery.txt
     with open(to_file, 'w') as f:
         f.write('\n'.join(gallery))
+
+    with open(to_file, 'r') as file:
+        lines = file.readlines()
+
+    with open(to_file, 'w') as file:
+        for line in lines:
+            if line.strip():
+                file.write(line)
