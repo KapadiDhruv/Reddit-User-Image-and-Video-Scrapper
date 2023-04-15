@@ -53,7 +53,7 @@ os.system('python3 del_gifv_txt.py')
 # os.system('python3 push_data_mysql.py')
 os.system('python3 donwloadimages.py')
 os.system('python3 downloadgalleryimages.py')
-os.system('python3 uploadtogcp.py')
+# os.system('python3 uploadtogcp.py')
 # os.system('python3 beep.py')
 
 print(Back.GREEN + 'HOGYA, TATA, BYEBYE')
