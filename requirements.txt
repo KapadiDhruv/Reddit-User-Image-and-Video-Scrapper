@@ -3,9 +3,10 @@ wget
 RedDownloader
 pandas
 imgurpython
-opencv-python3
+opencv-python
 splitter
 gallery-dl 
 requests
 prettytable 
 Pillow
+pymongo

@@ -1,7 +1,7 @@
 import os
 import re
 
-url = 'python3 testGallery.py > Gallery_Links.txt'
+url = 'python testGallery.py > Gallery_Links.txt'
 os.system(url)
 
 

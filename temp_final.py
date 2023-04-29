@@ -1,6 +1,6 @@
 import os 
 
-os.system("python3 final.py")
+os.system("python final.py")
 
 # To delete the "NONE" term
 with open("txtxt.txt",'r') as file:
