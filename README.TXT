@@ -16,7 +16,7 @@ open = del_redgif.py
 To run this : 
 1. open sub_list.csv
 2. enter the username 
-3. in terminal paste:  python execute.py
+3. in terminal paste:  python3 execute.py
 
 BY DEFAULT IT IS SET TO TOP ALL TIME 3000 POSTS INCLUDING :
 - i.redd.it 

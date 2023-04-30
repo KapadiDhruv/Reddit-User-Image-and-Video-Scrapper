@@ -1,5 +1,5 @@
 i have solved the "praw 'Comment' object has no attribute 'url'
-ans. comment out C:\Users\DHRUV\AppData\Local\Programs\Python\Python310\lib\site-packages\praw\models\reddit\base.py   line 36 37 38
+ans. comment out C:\Users\DHRUV\AppData\Local\Programs\python3\python3310\lib\site-packages\praw\models\reddit\base.py   line 36 37 38
 
 
 30.04.2022 :there is maybe an update in PRAW : when executing term "None" appears in txtxt.txt file so to overcome
