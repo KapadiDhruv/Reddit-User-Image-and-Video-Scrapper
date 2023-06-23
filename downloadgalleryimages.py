@@ -6,11 +6,19 @@ from os.path import exists
 import time
 from prettytable import PrettyTable
 from PIL import Image, ImageDraw, ImageFont
+from concurrent import futures
 
 start_time = time.time()
 
 # Define font to use for the images
 # font = ImageFont.truetype("arial.ttf", size=12)
+
+def download_file(url):
+    response = requests.get(url)
+    file_content = response.content
+    file_hash = hashlib.sha256(file_content).hexdigest()
+    filename = url.split("/")[-1]
+    return file_content, file_hash, filename
 
 with open("sub_list.csv", "r") as f_subreddits:
     for sub in f_subreddits:
@@ -34,21 +42,25 @@ with open("sub_list.csv", "r") as f_subreddits:
     index = 1
     duplicates = 0
     total_download_time = 0
-    for url in urls:
-        response = requests.get(url)
-        file_content = response.content
-        file_hash = hashlib.sha256(file_content).hexdigest()
-        filename = url.split("/")[-1]
-        if file_hash in downloads.values():
-            duplicates += 1
-        else:
-            start_download_time = time.time()
-            file_name = f"{index}_{filename}"
-            with open(f"{pics_directory}/{file_name}", "wb") as f:
-                f.write(file_content)
-            downloads[file_name] = {"hash": file_hash, "time": time.time() - start_download_time, "size": len(file_content)}
-            total_download_time += downloads[file_name]["time"]
-            index += 1
+
+    with futures.ThreadPoolExecutor() as executor:
+        future_to_url = {executor.submit(download_file, url): url for url in urls}
+        for future in futures.as_completed(future_to_url):
+            url = future_to_url[future]
+            try:
+                file_content, file_hash, filename = future.result()
+                if file_hash in downloads.values():
+                    duplicates += 1
+                else:
+                    start_download_time = time.time()
+                    file_name = f"{index}_{filename}"
+                    with open(f"{pics_directory}/{file_name}", "wb") as f:
+                        f.write(file_content)
+                    downloads[file_name] = {"hash": file_hash, "time": time.time() - start_download_time, "size": len(file_content)}
+                    total_download_time += downloads[file_name]["time"]
+                    index += 1
+            except Exception as e:
+                print(f"An error occurred while downloading file {url}: {str(e)}")
 
     total_download_time_str = f"{total_download_time:.2f} seconds" if total_download_time >= 1 else f"{total_download_time * 1000:.2f} ms"
 

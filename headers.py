@@ -1,32 +1,33 @@
-import sys, json, os
+import sys
+import json
+import os
 import traceback
-import requests, time, shutil
+import requests
+import time
+import shutil
 import wget
 import hashlib
+import concurrent.futures
 
-
-  
 # importing time module
 import time
 
 
 def url_file(redgifs_url, filename):
-
     sys.stdout.reconfigure(encoding='utf-8')
     API_URL_REDGIFS = 'https://api.redgifs.com/v1/gifs/'
     try:
         print("redgifs_url = {}".format(redgifs_url))
 
-        #Get RedGifs video ID
+        # Get RedGifs video ID
         redgifs_ID = redgifs_url.split('/watch/', 1)
         redgifs_ID = redgifs_ID[1]
         print("redgifs_ID = {}".format(redgifs_ID))
-        
+
         sess = requests.Session()
-        
+
         request = sess.get(API_URL_REDGIFS + redgifs_ID)
 
-        
         if request is None:
             return
         else:
@@ -47,7 +48,7 @@ def url_file(redgifs_url, filename):
                         shutil.copyfileobj(r.raw, f)
                     video_hash = hashlib.sha256(open(filename, 'rb').read()).hexdigest()
                     return {'filename': filename, 'sha256': video_hash}
-            else : 
+            else:
                 print("redgifs_url not present!")
 
     except Exception:
@@ -55,13 +56,19 @@ def url_file(redgifs_url, filename):
         return
 
 
+def process_video(sub):
+    print(sub)
+    video_data = url_file(f"https://www.redgifs.com/watch/{sub}", f"{sub}.mp4")
+    if video_data:
+        return sub, video_data
+
 
 f_final = open("sub_list.csv", "r")
 
 for line in f_final:
     user = line.strip()
 
-file = open(f'{user}/onlyredgif_{user}.txt',"r+")
+file = open(f'{user}/onlyredgif_{user}.txt', "r+")
 
 # folder_name = user + '_vid'
 folder_name = f'{user}/videos_{user}'
@@ -71,12 +78,19 @@ os.mkdir(folder_name)
 
 os.chdir(os.path.join(os.getcwd(), f'{folder_name}'))
 video_info = {}
+videos_to_process = []
+
 for line in file:
     sub = line.strip()
-    print(sub)
-    video_data = url_file(f"https://www.redgifs.com/watch/{sub}", f"{sub}.mp4")
-    if video_data:
-        video_info[sub] = video_data
+    videos_to_process.append(sub)
+
+with concurrent.futures.ThreadPoolExecutor() as executor:
+    results = executor.map(process_video, videos_to_process)
+
+for result in results:
+    if result is not None:
+        sub, data = result
+        video_info[sub] = data
 
 with open('video_info.json', 'w') as f:
     json.dump(video_info, f)
@@ -93,8 +107,7 @@ for filename in os.listdir(folder_path):
                 video_info = json.load(f)
             video_info[filename[:-4]] = video_data
             with open('video_info.json', 'w') as f:
-                json.dump(video_info, f)
-
+                json.dump(video_info, f, indent=4)
 
 # check the hash key and delete duplicate
 
@@ -116,4 +129,4 @@ for sub, data in list(video_info.items()):
         del video_info[sub]
 
 with open('video_info.json', 'w') as f:
-    json.dump(video_info, f,indent=4)
+    json.dump(video_info, f, indent=4)
