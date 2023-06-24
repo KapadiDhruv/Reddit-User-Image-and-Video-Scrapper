@@ -49,7 +49,7 @@ os.system('python transfer_to_mongo.py')
 os.system('python create_mysql_table.py')
 os.system('python push_data_mysql.py')
 os.system('python beep.py')
-print("ds")
+
 print(Back.GREEN + 'HOGYA, TATA, BYEBYE')
 print(Style.RESET_ALL)
 
