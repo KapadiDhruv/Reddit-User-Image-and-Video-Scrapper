@@ -2,8 +2,6 @@ import os
 import py_compile
 import sys
 import shutil
-from colorama import Fore, Back, Style
-
 
 # to take userInput for the /u/
 input_var = input("Enter Username: ")
@@ -56,9 +54,6 @@ os.system('python3 downloadgalleryimages.py')
 # os.system('python3 transfer_to_mongo.py')
 # os.system('python3 uploadtogcp.py')
 # os.system('python3 beep.py')
-
-print(Back.GREEN + 'HOGYA, TATA, BYEBYE')
-print(Style.RESET_ALL)
 
 my_file = "test.json"
 base = os.path.splitext(my_file)[0]
